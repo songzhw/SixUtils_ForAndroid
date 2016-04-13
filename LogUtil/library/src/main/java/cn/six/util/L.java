@@ -17,13 +17,20 @@ public class L {
 
         StringBuilder sb = new StringBuilder();
         StackTraceElement element = traces[3];
+
+        String classWholeName = element.getClassName();
+        String className = classWholeName.substring(classWholeName.lastIndexOf(".") + 1);
+
+
 //        for(StackTraceElement element : traces) {
-            sb.append(element.getClassName());
+            sb.append(classWholeName);
             sb.append(" || ");
             sb.append(element.getMethodName());
-            sb.append(" || ");
+            sb.append("() || ( ");
+            sb.append(className);
+            sb.append(".java:");
             sb.append(element.getLineNumber());
-            sb.append("\n");
+            sb.append(")\n");
 //        }
         sb.append(msg);
 

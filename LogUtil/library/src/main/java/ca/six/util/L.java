@@ -1,4 +1,4 @@
-package cn.six.util;
+package ca.six.util;
 
 import android.util.Log;
 

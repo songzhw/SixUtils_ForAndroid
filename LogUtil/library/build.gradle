@@ -23,3 +23,22 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
 }
+
+
+//添加
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    //bintray.com用户名
+    userOrg = 'songzhw'
+    //jcenter上的路径
+    groupId = 'ca.six.util'
+    //项目名称
+    artifactId = 'LogUtil'
+    //版本号
+    publishVersion = '1.0.0'
+    //描述，不重要
+    desc = "songzhw's Log Utils"
+    //网站，不重要
+    website = 'https://github.com/songzhw/android-utils/tree/master/LogUtil'
+
+}

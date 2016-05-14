@@ -23,7 +23,7 @@ public class L {
 
 
 //        for(StackTraceElement element : traces) {
-            sb.append(classWholeName);
+            sb.append(className);
             sb.append(" || ");
             sb.append(element.getMethodName());
             sb.append("() || ( ");

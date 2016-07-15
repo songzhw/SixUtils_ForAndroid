@@ -5,4 +5,5 @@ package ca.six.util;
  */
 public interface IAfterDo {
     void doAfterPermission();
+    void userDenyPermission();
 }

@@ -1,4 +1,4 @@
-package ca.six.perm;
+package ca.six.util.demo;
 
 import org.junit.Test;
 

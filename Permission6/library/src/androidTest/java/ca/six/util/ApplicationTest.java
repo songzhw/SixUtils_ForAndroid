@@ -1,4 +1,4 @@
-package ca.six.perm.lib;
+package ca.six.util;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

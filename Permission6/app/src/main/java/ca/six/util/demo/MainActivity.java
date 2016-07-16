@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void userDenyPermission() {
         Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+
+        // normally, a dialog is better for user experience
+        Permission6.startAppSettings(this, "ca.six.util.demo");
     }
 
     @Override

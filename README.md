@@ -10,7 +10,7 @@ This is an Android log library.
 
 ```groovy
   dependencies {
-    classpath 'ca.six.util:LogUtil:1.0.1'
+    compile 'ca.six.util:LogUtil:1.0.1'
   }
 ```
 
@@ -32,6 +32,16 @@ The `(MainActivity.java: Line 08)` is clickable. And if you click it, Android St
 # 2. Permission6
 
 A easy way to implement the permission check/request code in Android 6.0
+
+
+## How to import it
+
+```groovy
+  dependencies {
+    compile 'ca.six.util:Permisssion6:1.0.1
+  }
+```
+
 
 ## How to use it
 

@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -23,3 +23,14 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.0.0'
 }
+
+apply plugin: 'com.novoda.bintray-release'
+publish {
+    userOrg = 'songzhw'      //bintray.com用户名
+    groupId = 'ca.six.util'  //jcenter上的路径
+    artifactId = 'Permisssion6'   //项目名称
+    publishVersion = '1.0.1' //版本号
+    desc = "Deal with Android 6's permission system" //描述，不重要
+    website = 'https://github.com/songzhw/android-utils/tree/master/Permission6'  //网站，不重要
+}
+

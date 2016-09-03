@@ -38,7 +38,7 @@ A easy way to implement the permission check/request code in Android 6.0
 
 ```groovy
   dependencies {
-    compile 'ca.six.util:Permisssion6:1.0.1
+    compile 'ca.six.util:Permisssion6:1.0.1'
   }
 ```
 

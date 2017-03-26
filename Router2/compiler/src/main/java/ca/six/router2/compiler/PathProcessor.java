@@ -52,7 +52,11 @@ public class PathProcessor extends AbstractProcessor {
         }
 
         String moduleName = processingEnv.getOptions().get("moduleName");
-        log(null, "szw Processor process() module = "+moduleName);
+        if(moduleName != null) {
+            log(null, "szw Processor process() module = " + moduleName);
+        } else {
+            error(null, "No option 'moduleName' passed to processor");
+        }
 
         return true;
     }

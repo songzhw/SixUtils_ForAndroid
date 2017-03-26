@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import ca.six.router2.annotation.Path;
+
+@Path("mod2")
 public class Module2Activity extends Activity {
 
     @Override

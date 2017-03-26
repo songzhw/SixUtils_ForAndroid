@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import ca.six.router2.annotation.Path;
+
+@Path("login")
 public class LoginActivity extends Activity {
 
     @Override

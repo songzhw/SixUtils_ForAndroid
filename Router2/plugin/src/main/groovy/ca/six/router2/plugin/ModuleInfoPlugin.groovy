@@ -15,9 +15,11 @@ class ModuleInfoPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
+
         // 1. add the dependencies automatically
         Project lib = project.rootProject.findProject("lib")
         Project compiler = project.rootProject.findProject("compiler")
+        println "szw Plugin apply() currentProject = ${project.name} -- ${lib&&compiler}"
         if(lib && compiler){
             project.dependencies {
                 compile lib
@@ -37,12 +39,10 @@ class ModuleInfoPlugin implements Plugin<Project> {
                         it.plugins.hasPlugin(LibraryPlugin) &&
                                 it.plugins.hasPlugin(ModuleInfoPlugin)
                     }
-                    println "szw other module size = ${modules.size()}"
                     def sb = new StringBuilder()
                     modules.each { Project libProj->
                         sb.append(libProj.name)
                         sb.append(",")
-                        println "szw other module = ${libProj.name}"
                     }
                     sb.append(project.name)
 
@@ -66,8 +66,10 @@ class ModuleInfoPlugin implements Plugin<Project> {
             }
             else {
                 LibraryExtension libExtension = project.android
+                println "szw lib--> ${libExtension.libraryVariants.size()} :  ${project.name}"
                 libExtension.libraryVariants.all{LibraryVariantImpl variant ->
                     def comp = variant.javaCompile
+                    println "szw lib --> ${variant.name} : ${comp != null}"
                     if(comp != null){
                         comp.options.compilerArgs.add("-A${APT_ARGUMENT_KEY}=${project.name}")
                     }

@@ -1,4 +1,4 @@
-package ca.six.router2;
+package ca.six.router2.demo;
 
 import android.app.Application;
 

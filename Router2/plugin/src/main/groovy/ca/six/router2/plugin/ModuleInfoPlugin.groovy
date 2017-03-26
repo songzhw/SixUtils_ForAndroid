@@ -35,10 +35,12 @@ class ModuleInfoPlugin implements Plugin<Project> {
                         it.plugins.hasPlugin(LibraryPlugin) &&
                                 it.plugins.hasPlugin(ModuleInfoPlugin)
                     }
+                    println "szw other module size = ${modules.size()}"
                     def sb = new StringBuilder()
                     modules.each { Project libProj->
                         sb.append(libProj.name)
                         sb.append(",")
+                        println "szw other module = ${libProj.name}"
                     }
                     sb.append(project.name)
 

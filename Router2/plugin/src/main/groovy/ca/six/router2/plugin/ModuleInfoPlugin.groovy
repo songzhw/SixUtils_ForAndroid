@@ -11,6 +11,8 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class ModuleInfoPlugin implements Plugin<Project> {
+    public static final String APT_ARGUMENT_KEY = "moduleName";
+
     @Override
     void apply(Project project) {
         // 1. add the dependencies automatically
@@ -57,17 +59,19 @@ class ModuleInfoPlugin implements Plugin<Project> {
                     if(comp != null){
                         comp.dependsOn createFileTask
                         comp.source(parentFile)// add generated file to javac source
-                    }
 
-                    //todo apt
+                        comp.options.compilerArgs.add("-A${APT_ARGUMENT_KEY}=${project.name}")
+                    }
                 }
             }
             else {
-                //todo apt
-//                LibraryExtension libExtension = project.android
-//                libExtension.libraryVariants.all{LibraryVariantImpl variant ->
-//
-//                }
+                LibraryExtension libExtension = project.android
+                libExtension.libraryVariants.all{LibraryVariantImpl variant ->
+                    def comp = variant.javaCompile
+                    if(comp != null){
+                        comp.options.compilerArgs.add("-A${APT_ARGUMENT_KEY}=${project.name}")
+                    }
+                }
             }
         }
 

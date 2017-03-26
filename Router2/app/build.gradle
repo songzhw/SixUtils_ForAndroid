@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'ca.six.router2.plugin'
 
 android {
     compileSdkVersion 25

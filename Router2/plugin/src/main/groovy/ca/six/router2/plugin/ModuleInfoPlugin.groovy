@@ -33,7 +33,7 @@ class ModuleInfoPlugin implements Plugin<Project> {
                     // 2.1. get Modules info
                     def modules = project.rootProject.subprojects.findAll {
                         it.plugins.hasPlugin(LibraryPlugin) &&
-                                it.plugins.hasPlugin(HelloPlugin)
+                                it.plugins.hasPlugin(ModuleInfoPlugin)
                     }
                     def sb = new StringBuilder()
                     modules.each { Project libProj->
@@ -44,7 +44,8 @@ class ModuleInfoPlugin implements Plugin<Project> {
 
                     // 2.2. generate task
                     def parentFile = FileUtils.join(project.buildDir, "generated","source","router2")
-                    def bingTask = project.tasks.create("bingxx_${variant.name}", BingTask) {
+                    def createFileTask = project.tasks.create(
+                            "router2_generate_file_${variant.name}", CreateFileTask) {
                         it.baseFile = parentFile
                         it.content = sb.toString()
                     }
@@ -52,7 +53,7 @@ class ModuleInfoPlugin implements Plugin<Project> {
                     // 2.3. generate dependency
                     def comp = variant.javaCompile
                     if(comp != null){
-                        comp.dependsOn bingTask
+                        comp.dependsOn createFileTask
                         comp.source(parentFile)// add generated file to javac source
                     }
 
@@ -69,9 +70,6 @@ class ModuleInfoPlugin implements Plugin<Project> {
         }
 
 
-
-        println "szw project = ${project.name}"
-        String name = project.name
     }
 
 }

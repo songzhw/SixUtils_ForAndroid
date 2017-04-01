@@ -24,7 +24,6 @@ public class Module1Activity extends Activity {
     }
 
     public void onClickSimpleButton2(View v) {
-
     }
 
 }

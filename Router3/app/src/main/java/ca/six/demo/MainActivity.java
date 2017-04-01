@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
     }
 
     public void onClickSimpleButton2(View v) {
-
+        Router3.getInstance().go(this, "login/third");
     }
 }
 

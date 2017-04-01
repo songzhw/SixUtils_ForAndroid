@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import ca.six.common.Router3;
 
 
 public class LoginActivity extends Activity {
@@ -21,6 +22,8 @@ public class LoginActivity extends Activity {
     }
 
     public void onClickSimpleButton(View v) {
+        System.out.println("szw login : url = "+getIntent().getDataString());
+        Router3.getInstance().rego(this);
     }
 
     public void onClickSimpleButton2(View v){

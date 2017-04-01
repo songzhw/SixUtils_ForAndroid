@@ -13,6 +13,7 @@ import java.util.ServiceLoader;
 public class Router3 {
     private static Router3 instance = new Router3();
     private final HashMap<String, Class<? extends Activity>> map;
+    private final HashMap<Class<? extends Activity>, String> map2;
 
     public static Router3 getInstance() {
         return instance;
@@ -20,10 +21,12 @@ public class Router3 {
 
     private Router3() {
         map = new HashMap<>();
+        map2 = new HashMap<>();
     }
 
     public void merge(String url, Class<? extends Activity> activityClass) {
-        map.put(url, activityClass);
+        map.put(url, activityClass);  // 给正常跳转用
+        map2.put(activityClass, url); // 给多级跳转用
     }
 
     public void init() {
@@ -33,6 +36,7 @@ public class Router3 {
         }
     }
 
+    // ================================================
     public void go(Context ctx, String url) {
         // 应对多级跳转
         String[] splited = url.split("/");
@@ -48,7 +52,7 @@ public class Router3 {
     private void _go(Context ctx, String jumpUrl, String realUrl) {
         Class<? extends Activity> clz = map.get(jumpUrl);
         if (clz == null) {
-            Log.e("Router3", "====== no class matched! ======= ");
+            Log.e("Router3", "====== go(): no class matched! ======= ");
             return;
         }
 
@@ -64,4 +68,21 @@ public class Router3 {
         ctx.startActivity(it);
     }
 
+
+    // ================================================
+    // TODO: 2017-04-01 暂不支持 “一个Activity对应多个URL”的配置
+    public void rego(Activity ctx){
+        Class<? extends Activity> clz = ctx.getClass();
+        String url = map2.get(clz);
+        if(url == null){
+            Log.e("Router3", "====== rego(): no url matched! ======= ");
+            return;
+        }
+
+        String urlInActivity = ctx.getIntent().getDataString();
+        String middleUrl = urlInActivity.replace(url+"/","");
+
+        go(ctx, middleUrl);
+
+    }
 }

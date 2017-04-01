@@ -18,6 +18,7 @@ public class Module2Activity extends Activity {
     }
 
     public void onClickSimpleButton(View v) {
+        Router3.getInstance().go(this, "mod1");
     }
 
     public void onClickSimpleButton2(View v) {

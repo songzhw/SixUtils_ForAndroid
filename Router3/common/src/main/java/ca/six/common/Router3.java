@@ -31,4 +31,14 @@ public class Router3 {
         }
     }
 
+    public void go(Context ctx, String url){
+        Class<? extends Activity> clz = map.get(url);
+
+        Intent it = new Intent(ctx, clz);
+        boolean isCtxActivity = ctx instanceof Activity;
+        if(!isCtxActivity){
+            it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        ctx.startActivity(it);
+    }
 }

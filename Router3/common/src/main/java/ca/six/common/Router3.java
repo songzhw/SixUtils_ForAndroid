@@ -34,9 +34,21 @@ public class Router3 {
     }
 
     public void go(Context ctx, String url) {
-        Class<? extends Activity> clz = map.get(url);
-        if(clz == null){
-            Log.e("Router3","====== no class matched! ======= ");
+        // 应对多级跳转
+        String[] splited = url.split("/");
+        String jumpUrl = "";
+        if (splited.length > 0) {
+            jumpUrl = splited[0];
+        }
+
+        // 真正的跳转
+        _go(ctx, jumpUrl, url);
+    }
+
+    private void _go(Context ctx, String jumpUrl, String realUrl) {
+        Class<? extends Activity> clz = map.get(jumpUrl);
+        if (clz == null) {
+            Log.e("Router3", "====== no class matched! ======= ");
             return;
         }
 
@@ -46,9 +58,10 @@ public class Router3 {
             it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
 
-        Uri uri = Uri.parse(url);
+        Uri uri = Uri.parse(realUrl);
         it.setData(uri);
 
         ctx.startActivity(it);
     }
+
 }

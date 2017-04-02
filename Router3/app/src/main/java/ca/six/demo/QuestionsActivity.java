@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import ca.six.common.Router3;
 
 
 public class QuestionsActivity extends Activity {
@@ -19,6 +20,7 @@ public class QuestionsActivity extends Activity {
     }
 
     public void onClickSimpleButton(View v) {
+        Router3.getInstance().rego(this);
     }
 
     public void onClickSimpleButton2(View v) {

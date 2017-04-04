@@ -9,6 +9,9 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.ServiceLoader;
 
+// TODO: 2017-04-03 1. add arguments
+// TODO: 2017-04-03 2. add flag
+// TODO: 2017-04-03 3. (maybe) interceptor
 
 public class Router3 {
     private static Router3 instance = new Router3();

@@ -21,9 +21,12 @@ public class MainActivity extends Activity {
     }
 
     public void onClickSimpleButton(View v) {
+        Bundle bundle = new Bundle();
+        bundle.putString("key","from MainActivity");
 
         Router3.getInstance()
                 .addFlag(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
+                .addBundle(bundle)
                 .go(this, "mod1");
     }
 

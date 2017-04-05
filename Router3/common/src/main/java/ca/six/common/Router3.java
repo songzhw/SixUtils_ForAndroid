@@ -48,6 +48,10 @@ public class Router3 {
         return this;
     }
 
+    public Router3 addBundle(Bundle bundle){
+        this.bundle = bundle;
+        return this;
+    }
 
     // ================================================
     public void go(Context ctx, String url) {

@@ -10,10 +10,8 @@ import android.util.Log;
 import java.util.HashMap;
 import java.util.ServiceLoader;
 
-// TODO: 2017-04-03 1. add arguments (暂不支持多级跳转)
-// TODO: 2017-04-03 2. add flag (暂不支持多级跳转)
-// TODO: 2017-04-03 3. (maybe) interceptor
-
+// 1. add arguments (暂不支持多级跳转) -- 要支持也不验证，就是在_go()里判断， 是最后一级才加it.putExtras(bundle)
+// 2. add flag      (暂不支持多级跳转)
 public class Router3 {
     private static Router3 instance = new Router3();
     private final HashMap<String, Class<? extends Activity>> map;

@@ -16,7 +16,8 @@ public class Module1Activity extends Activity {
         setContentView(R.layout.activity_tv_btn);
 
         TextView tv = (TextView)findViewById(R.id.tv_simple);
-        tv.setText("Module 01");
+        String str = getIntent().getStringExtra("key");
+        tv.setText("Module 01 " + str );
     }
 
     public void onClickSimpleButton(View v) {

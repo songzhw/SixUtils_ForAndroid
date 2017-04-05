@@ -4,19 +4,23 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.util.HashMap;
 import java.util.ServiceLoader;
 
-// TODO: 2017-04-03 1. add arguments
-// TODO: 2017-04-03 2. add flag
+// TODO: 2017-04-03 1. add arguments (暂不支持多级跳转)
+// TODO: 2017-04-03 2. add flag (暂不支持多级跳转)
 // TODO: 2017-04-03 3. (maybe) interceptor
 
 public class Router3 {
     private static Router3 instance = new Router3();
     private final HashMap<String, Class<? extends Activity>> map;
     private final HashMap<Class<? extends Activity>, String> map2;
+
+    private int flag = -1;
+    private Bundle bundle;
 
     public static Router3 getInstance() {
         return instance;
@@ -38,6 +42,12 @@ public class Router3 {
             service.merge();
         }
     }
+
+    public Router3 addFlag(int flag){
+        this.flag = flag;
+        return this;
+    }
+
 
     // ================================================
     public void go(Context ctx, String url) {
@@ -63,6 +73,14 @@ public class Router3 {
         boolean isCtxActivity = ctx instanceof Activity;
         if (!isCtxActivity) {
             it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        } else {
+            if(flag != -1){
+                it.addFlags(flag);
+            }
+        }
+
+        if(bundle != null){
+            it.putExtras(bundle);
         }
 
         Uri uri = Uri.parse(realUrl);

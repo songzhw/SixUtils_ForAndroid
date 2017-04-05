@@ -1,6 +1,7 @@
 package ca.six.demo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,7 +21,10 @@ public class MainActivity extends Activity {
     }
 
     public void onClickSimpleButton(View v) {
-        Router3.getInstance().go(this, "mod1");
+
+        Router3.getInstance()
+                .addFlag(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
+                .go(this, "mod1");
     }
 
     public void onClickSimpleButton2(View v) {

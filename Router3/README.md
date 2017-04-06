@@ -14,7 +14,7 @@ The content of this configuration file is just the name of all the classes you j
 
 3. At last, you init the Router in your application
 ```java
-public class Ar_App extends Application {
+public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -32,10 +32,10 @@ public class Ar_App extends Application {
     
 2. add arguments and intent flag
 ```java
-        Router3.getInstance()
-                .addFlag(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
-                .addBundle(bundle)
-                .go(this, "mod1");
+Router3.getInstance()
+    .addFlag(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_FLAG)
+    .addBundle(bundle)
+    .go(this, "mod1");
 ```
 
 3. jump to multiple places

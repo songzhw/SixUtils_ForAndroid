@@ -31,7 +31,13 @@ public class MainActivity extends Activity {
     }
 
     public void onClickSimpleButton2(View v) {
-        Router3.getInstance().go(this, "login/questions/third");
+        Bundle bundle = new Bundle();
+        bundle.putString("key2","from MainActivity 2222");
+
+        Router3.getInstance()
+                .addFlag(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK)
+                .addBundle(bundle)
+                .go(this, "login/questions/third");
     }
 }
 

@@ -14,10 +14,9 @@ public class ThirdActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_btn);
 
-        StringBuilder builder = new StringBuilder();
-        builder.append("Third Page\n");
-        TextView textView = (TextView) findViewById(R.id.tv_simple);
-        textView.setText(builder.toString());
+        String str = getIntent().getStringExtra("key2");
+        textView.setText("Third Page ("+str+")");
+
     }
 
     public void onClickSimpleButton(View v){

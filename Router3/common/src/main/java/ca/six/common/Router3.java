@@ -65,6 +65,9 @@ public class Router3 {
     }
 
     private void _go(Context ctx, String jumpUrl, String realUrl) {
+        // 应对多级跳转: 最后一级才加bundle 与 flag
+        boolean isEndPoint = jumpUrl.equalsIgnoreCase(realUrl);
+
         Class<? extends Activity> clz = map.get(jumpUrl);
         if (clz == null) {
             Log.e("Router3", "====== go(): no class matched! ======= ");
@@ -76,13 +79,17 @@ public class Router3 {
         if (!isCtxActivity) {
             it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         } else {
-            if(flag != -1){
-                it.addFlags(flag);
+            if(isEndPoint) {
+                if (flag != -1) {
+                    it.addFlags(flag);
+                }
             }
         }
 
-        if(bundle != null){
-            it.putExtras(bundle);
+        if(isEndPoint) {
+            if (bundle != null) {
+                it.putExtras(bundle);
+            }
         }
 
         Uri uri = Uri.parse(realUrl);

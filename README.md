@@ -22,10 +22,9 @@ L.d("your message")
 
 ## output 
 
-```
-v/szw:  MainActivity  || onCreate() || (MainActivity.java: Line 08)
-        your message
-```
+![](/pic/logutils.jpg)
+
+
 
 The `(MainActivity.java: Line 08)` is clickable. And if you click it, Android Studio will jump to the line 8 of MainActivity. 
 

@@ -83,5 +83,61 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 }
 ```
 
+# 3. RxJava - EasyDispose
 
+## 3.1 Context
+The following code, in my opinion, is not elegant, and is hard to read. 
 
+```kotlin
+compositeDisposable.add(
+    MyHttpEngine.fetchSomething()
+        .subscribe {...}
+)
+```
+
+First, you need to initialize one CompositeDisposable instance
+And later, you must not forget to use "compositeDisposable.add(...)"
+Of course, you also have to call `compositeDisposable.clear` in the onDestory() or onStop
+Also, too much brackets looks ugly for me.
+
+These are, of course, boilerplate. I am a guy who hat boilerplate. It's hard to write, to extend, and easy to make mistake.  That's why I made this tool.
+
+## 3.2 How to use this tool
+All you have to do is add a `disposedBy()` add the end of your rxjava call chain.
+
+### Approach 01
+Take the previous code for example, now you just need to write the following code:
+
+```kotlin
+    MyHttpEngine.fetchSomething()
+        .subscribe {...}
+        .disposedBy(lifecycle) // "lifecycle" is the appcompatActivity.getLifeyCycle()
+```
+
+Then this subscription will get disposed in your Actiivty's onDestory().
+
+### Approach 02
+Or you could indicate that which phrase you want to dispose this subscription.
+
+```kotlin
+    MyHttpEngine.fetchSomething()
+        .subscribe {...}
+        .disposedBy(lifecycle, Lifecycle.Event.ON_STOP) // "lifecycle" is the appcompatActivity.getLifeyCycle()
+```
+
+### Approach 03
+Or you could also provide an CompositeDisposable. 
+Remember, you still need to call `compositeDisposable.clear()` in the destroy of your Activity.
+
+```kotlin
+fun foo() {
+    MyHttpEngine.fetchSomething()
+        .subscribe {...}
+        .disposedBy(compositeDisposable)
+}
+
+fun onDestory(){
+    compositeDisposable.clear()
+    super.onDestory()
+}
+```

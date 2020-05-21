@@ -141,3 +141,37 @@ fun onDestory(){
     super.onDestory()
 }
 ```
+
+# 4. Timeout
+Did you ever want a handy timeout function, just like JavaScript's `setTimeout(lambda, timeout)`. Yeah, here it is. 
+
+Here is how to use it:
+
+```kotlin
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        println("szw start : ${System.currentTimeMillis()}")
+        timeout(6000) {
+            println("szw 6 second timeout: ${System.currentTimeMillis()}")
+        }
+
+        timeout(4000) {
+            println("szw 4 second timeout: ${System.currentTimeMillis()}")
+        }
+    }
+}
+```
+
+You can also pass a different Thread's looper to this timeout function. So you could use this timeout function outside the UI thread.
+
+```kotlin
+val handlerThread = HandlerThread("thread-2")
+handlerThread.start()
+timeout(handlerThread.getLooper, 3000){
+    println("ok, timeout")
+}
+```

@@ -1,2 +1,3 @@
 rootProject.name='SixTimeout'
 include ':app'
+include ':mylibrary'

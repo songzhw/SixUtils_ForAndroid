@@ -23,9 +23,10 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-fun timeout(delayInMillSec: Long, job: () -> Unit) {
+
+fun timeout(looper: Looper=Looper.getMainLooper(), delayInMillSec: Long, job: () -> Unit) {
     val timeoutId = 12345
-    val handler = object : Handler(Looper.getMainLooper()) {
+    val handler = object : Handler(looper) {
         override fun handleMessage(msg: Message) {
             if (msg.what == timeoutId) {
                 job()

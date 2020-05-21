@@ -171,7 +171,7 @@ You can also pass a different Thread's looper to this timeout function. So you c
 ```kotlin
 val handlerThread = HandlerThread("thread-2")
 handlerThread.start()
-timeout(handlerThread.getLooper, 3000){
+timeout(handlerThread.getLooper(), 3000){
     println("ok, timeout")
 }
 ```

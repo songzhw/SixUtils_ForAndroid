@@ -1,10 +1,29 @@
 package ca.six.timeout.demo
 
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import androidx.appcompat.app.AppCompatActivity
+
+fun timeout(delayInMillSec: Long, job: () -> Unit) {
+    timeout(Looper.getMainLooper(), delayInMillSec, job)
+}
+
+fun timeout(looper: Looper = Looper.getMainLooper(), delayInMillSec: Long, job: () -> Unit) {
+    val timeoutId = 12345
+    val handler = object : Handler(looper) {
+        override fun handleMessage(msg: Message) {
+            if (msg.what == timeoutId) {
+                job()
+            }
+        }
+    }
+
+    handler.sendEmptyMessageDelayed(timeoutId, delayInMillSec)
+}
+
+/*
+[demo]
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,15 +43,4 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-fun timeout(looper: Looper=Looper.getMainLooper(), delayInMillSec: Long, job: () -> Unit) {
-    val timeoutId = 12345
-    val handler = object : Handler(looper) {
-        override fun handleMessage(msg: Message) {
-            if (msg.what == timeoutId) {
-                job()
-            }
-        }
-    }
-
-    handler.sendEmptyMessageDelayed(timeoutId, delayInMillSec)
-}
+ */
